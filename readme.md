@@ -16,7 +16,7 @@ In all cases we will do our best to explain the principles here and give you som
 
 The tutorial code is in its own github repository. The Main branch represents the finished article (or if you are following along at the time this series was originally conceived the most up to date iteration). The Initial branch represents the project in its base configuration. This is the branch that we would recommend you fork inorder to follow along and hopefully derive the most from the series.
 
-If you have any direct questions about the tutorials please raise them in the Discussions section in this repository of in the [Vue Designer Discord Group]().
+If you have any direct questions about the tutorials please raise them in the Discussions section in this repository of in the [Vue Designer Discord Group](https://discord.com/invite/CeXtx8hXYf).
 
 If you notice or encounter a specific technical issue with the tutorials then please raise an issue in the Issues section in this repository.
 
