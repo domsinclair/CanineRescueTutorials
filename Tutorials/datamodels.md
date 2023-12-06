@@ -18,7 +18,7 @@ To make the lives of developers easier the concept of the Object Relational Mode
 
 There is a price to pay for this, isn't there always? The SQL that ORM's write is nowhere near as efficient as that written by a good SQL practitioner but for the average developer ORM's have made database interactions much much easier.
 
-Laravel has it'#s own ORM and our project is already in a position to use it, so with that in mind let's start to create some of the Data Models we are going to need.
+Laravel has it's own ORM and our project is already in a position to use it, so with that in mind let's start to create some of the Data Models we are going to need.
 
 <br>
 
