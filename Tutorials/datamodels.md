@@ -3,6 +3,7 @@
 - [Configuring the Data Models](#configuring-the-data-models)
   - [The First Model](#the-first-model)
     - [A word about tooling](#a-word-about-tooling)
+    - [Creating the basic model in VSCode](#creating-the-basic-model-in-vscode)
 
 If you've got to here then you will already have a working base application and a functional database.
 
@@ -48,3 +49,129 @@ Let's start with the animals. By convention the table name in the database will 
 Code is essentially nothing more than text. We could, quite literally write everything in Notepad. [Notepad++](https://notepad-plus-plus.org/) and [Sublime Text](https://www.sublimetext.com/) are two popular enhancements over Notepad for writing code files , not least because they have a degree of language and syntax support. VSCode is a lot beteer in that you also gain from some intellisense that is type safe aware. As free option go the latter is your best bet but you'll still have to write a lot of code manually. PhpStorm is going to provide you with a lot of code refactorings and templates. Once you become familiar with it it may almost appear that the code is writing itself. However we are now into the realms of paid for products. If you are going to be doing a lot of this then then it may be an investment that will provide you with a quick return. [Here's](https://laracasts.com/series/phpstorm-for-laravel-developers) another free series that will give you an insight into what PhpStorm has to offer. It will also introduce you to Laravel Idea which adds another layer of code completion to your armoury.
 
 With our first data model we'll cover using both VSCode and PhpStorm. If you are a good touch typist and really familiar with Php then feel free to use Notepad++ or sublime text but if you're not you'll have a better experience in VSCode or PhpStorm.
+
+<br>
+
+### Creating the basic model in VSCode
+
+<br>
+
+At the terminal in VSCode we can run the following command.
+
+`php artisan make:model Animal -mfsc`
+
+This will generate five basic classes;
+
+A Model
+
+```
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Animal extends Model
+{
+    use HasFactory;
+}
+```
+
+A Factory
+
+```
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Animal>
+ */
+class AnimalFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            //
+        ];
+    }
+}
+```
+
+A Migration
+
+```
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('animals', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('animals');
+    }
+};
+```
+
+A Seeder
+
+```
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class AnimalSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        //
+    }
+}
+```
+
+And finally a Controller
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class AnimalController extends Controller
+{
+    //
+}
+
+```
