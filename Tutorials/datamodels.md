@@ -4,6 +4,8 @@
   - [The First Model](#the-first-model)
     - [A word about tooling](#a-word-about-tooling)
     - [Creating the basic model in VSCode](#creating-the-basic-model-in-vscode)
+    - [Creating the basic model in PhpStorm (with Laravel Idea)](#creating-the-basic-model-in-phpstorm-with-laravel-idea)
+    - [What's the difference](#whats-the-difference)
 
 If you've got to here then you will already have a working base application and a functional database.
 
@@ -175,3 +177,225 @@ class AnimalController extends Controller
 }
 
 ```
+
+This is a reasonably comprehensive start but there is still a lot of additional code that we will need to create and some of it will be without the benefits of type safety.
+
+<br>
+
+### Creating the basic model in PhpStorm (with Laravel Idea)
+
+Now we're going to do much the same only this time using PhpStorm (with the plugin Laravel Idea installed). Whilst these are paid for products you can get a thirty day trial for both so it ought to be possible for you to try these for free.
+
+We created an Animal Model and associated classes but what sort of animals are we talking about? It's going to be a listings site where rescue societies can list the animals they have for adoption. Initially the idea was that this would be for dogs only however lets broaden that a bit and give ourselves some options.
+
+One way to do this would be to have a field in the Animal model called AnimalType into which the type of animal would be added when a new animal was added. Whilst this would work it relies on everyone who enters an animal record to use exactly the same AnimalType definitions, which they might not.
+
+We could add an AnimalType enumeration to the animal model. That would solve the problem we've just alluded to but could prove to be limiting. If the end users of the application wanted additional values adding to the enum they would have to contact the developers.
+
+Let's add a reference table (in database parlance) that will contain Animal Types and to which it will be easy for the end users to add additional types in the future.
+
+Open up the project in PhpStorm, navigate to the Laravel menu (if you haven't got one then you have installed Laravel Idea).
+
+<br>
+
+![](../images/datamodels1.jpg)
+
+<br>
+
+Select 'New Eloquent Model'.
+
+<br>
+
+![](../images/datamodel2.jpg)
+
+<br>
+
+Our Model name is going to be AnimalType.
+
+We'll add a Name field (which can be the default type of string) and we'll add an AnimalId field of type BigInteger which will reference the Animals table. In that way end users will ce able to select and animal type (say dog or cat) and see which animals that fall into that type are currently available for adoption.
+
+Here is our completed dialog.
+
+<br>
+
+![](../images/datamodels3.jpg)
+
+<br>
+
+You can see the name we've applied to the Model (and what the table name will be in the database).
+
+We have a Name field which is perfectly ok with the default data type of string.
+
+We have also checked the various additional bits we want to be created.
+
+Once we click ok this is what we end up with:
+
+The Model
+
+<br>
+
+```
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Animal_Type extends Model
+{
+    use SoftDeletes, HasFactory;
+
+    protected $fillable = [
+        'Name',
+    ];
+}
+```
+
+<br>
+
+The Migration
+
+<br>
+
+```
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::create('animal__types', function (Blueprint $table) {
+            $table->id();
+            $table->string('Name');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('animal__types');
+    }
+};
+```
+
+<br>
+
+The Factory
+
+<br>
+
+```
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Animal_Type;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
+
+class Animal_TypeFactory extends Factory
+{
+    protected $model = Animal_Type::class;
+
+    public function definition(): array
+    {
+        return [
+            'Name' => $this->faker->name(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ];
+    }
+}
+```
+
+<br>
+
+The Request
+
+<br>
+
+```
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class Animal_TypeRequest extends FormRequest
+{
+    public function rules(): array
+    {
+        return [
+            'Name' => ['required'],
+        ];
+    }
+
+    public function authorize(): bool
+    {
+        return true;
+    }
+}
+
+<br>
+
+and the Policy
+
+<br>
+
+```
+
+<?php
+
+namespace App\Policies;
+
+use App\Models\Animal_Type;
+use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class Animal_TypePolicy
+{
+    use HandlesAuthorization;
+
+    public function viewAny(User $user): bool
+    {
+
+    }
+
+    public function view(User $user, Animal_Type $animal_Type): bool
+    {
+    }
+
+    public function create(User $user): bool
+    {
+    }
+
+    public function update(User $user, Animal_Type $animal_Type): bool
+    {
+    }
+
+    public function delete(User $user, Animal_Type $animal_Type): bool
+    {
+    }
+
+    public function restore(User $user, Animal_Type $animal_Type): bool
+    {
+    }
+
+    public function forceDelete(User $user, Animal_Type $animal_Type): bool
+    {
+    }
+}
+```
+
+<br>
+
+
+###  What's the difference
+
+On first glance possible not that much but underneath we've achieved a lot more in PhpStorm.  The biggest this is the chance to add the fields we want to our Model, which in turns means that our migration file is more complete along with the factory.  Additionally, as we are about to discover, creating the relationship between the AnimalType and Animals table is going to become a lot easier.
