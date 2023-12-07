@@ -6,6 +6,7 @@
     - [Creating the basic model in VSCode](#creating-the-basic-model-in-vscode)
     - [Creating the basic model in PhpStorm (with Laravel Idea)](#creating-the-basic-model-in-phpstorm-with-laravel-idea)
     - [What's the difference](#whats-the-difference)
+    - [Creating Relationships between Models](#creating-relationships-between-models)
 
 If you've got to here then you will already have a working base application and a functional database.
 
@@ -341,6 +342,7 @@ class Animal_TypeRequest extends FormRequest
         return true;
     }
 }
+```
 
 <br>
 
@@ -395,7 +397,12 @@ class Animal_TypePolicy
 
 <br>
 
+### What's the difference
 
-###  What's the difference
+<br>
 
-On first glance possible not that much but underneath we've achieved a lot more in PhpStorm.  The biggest this is the chance to add the fields we want to our Model, which in turns means that our migration file is more complete along with the factory.  Additionally, as we are about to discover, creating the relationship between the AnimalType and Animals table is going to become a lot easier.
+On first glance possible not that much but underneath we've achieved a lot more in PhpStorm. The biggest this is the chance to add the fields we want to our Model, which in turns means that our migration file is more complete along with the factory. Additionally, as we are about to discover, creating the relationship between the AnimalType and Animals table is going to become a lot easier.
+
+<br>
+
+### Creating Relationships between Models
