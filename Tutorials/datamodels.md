@@ -7,6 +7,7 @@
     - [Creating the basic model in PhpStorm (with Laravel Idea)](#creating-the-basic-model-in-phpstorm-with-laravel-idea)
     - [What's the difference](#whats-the-difference)
     - [Creating Relationships between Models](#creating-relationships-between-models)
+    - [The One to Many Relationship.](#the-one-to-many-relationship)
 
 If you've got to here then you will already have a working base application and a functional database.
 
@@ -406,3 +407,21 @@ On first glance possible not that much but underneath we've achieved a lot more 
 <br>
 
 ### Creating Relationships between Models
+
+Relationships are what makes a relational database so understanding what they are and how to create them is crucial.
+
+The main Laravel documentation on the Eloquent ORM has an [excellent section on relationships](https://laravel.com/docs/10.x/eloquent-relationships#polymorphic-relationships) which we would urge to read before proceeding further. For the time being we'll be concentrating mainly on one to many relationships but we'd suggest bookmarking the documentation link for future reference.
+
+If youve read the documentation section you'll now know that we need to create relationship functions in our respective models.
+
+As things currently stand we have an AnimalType model which could have many related records in the Animal Model. Let's now see how PhpStorm and Laravel Idea make creating this relationship very much easier.
+
+<br>
+
+### The One to Many Relationship.
+
+<br>
+
+We know that we have a one to many relationship between AnimalType and Animal , so AnimalType will require a function that returns a HasMany type.
+
+Back in PhPStorm open up the AnimalType Model
