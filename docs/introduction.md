@@ -54,7 +54,7 @@ Fork the Initial Branch from the repository.
 
 You will need to create an env file ( it actually needs to be called .env ) for which you can use the .env.example as a baseplate. You will however need to substitute this section
 
-```lang=js
+```bash
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -65,7 +65,7 @@ DB_PASSWORD=
 
 with this
 
-```
+```bash
 DB_CONNECTION=sqlite
 DB_FOREIGN_KEYS=true
 ```
@@ -84,7 +84,7 @@ If at this stage you meet an error along these lines; could not find driver (SQL
 
 <br>
 
-```
+```bash
 php --ini
 ```
 
@@ -102,8 +102,7 @@ Now run the following two commands
 
 <br>
 
-```
-
+```bash
 php artisan serve
 npm run dev
 

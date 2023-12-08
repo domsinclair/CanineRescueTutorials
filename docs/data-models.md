@@ -68,7 +68,7 @@ This will generate five basic classes;
 
 A Model
 
-```
+```php
 <?php
 
 namespace App\Models;
@@ -84,7 +84,7 @@ class Animal extends Model
 
 A Factory
 
-```
+```php
 <?php
 
 namespace Database\Factories;
@@ -112,7 +112,7 @@ class AnimalFactory extends Factory
 
 A Migration
 
-```
+```php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -144,7 +144,7 @@ return new class extends Migration
 
 A Seeder
 
-```
+```php
 <?php
 
 namespace Database\Seeders;
@@ -166,7 +166,7 @@ class AnimalSeeder extends Seeder
 
 And finally a Controller
 
-```
+```php
 <?php
 
 namespace App\Http\Controllers;
@@ -236,7 +236,7 @@ The Model
 
 <br>
 
-```
+```php
 <?php
 
 namespace App\Models;
@@ -261,7 +261,7 @@ The Migration
 
 <br>
 
-```
+```php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -292,7 +292,7 @@ The Factory
 
 <br>
 
-```
+```php
 <?php
 
 namespace Database\Factories;
@@ -322,7 +322,7 @@ The Request
 
 <br>
 
-```
+```php
 <?php
 
 namespace App\Http\Requests;
@@ -351,8 +351,7 @@ and the Policy
 
 <br>
 
-```
-
+```php
 <?php
 
 namespace App\Policies;
