@@ -1,3 +1,11 @@
+---
+title: 'Introduction'
+date: 2023-12-06
+author: Dom Sinclair
+avatar: https://avatars.githubusercontent.com/u/12199442
+twitter: '@vuedesigner'
+---
+
 # Introduction
 
 This app is intended to demonstrate the creation form start to a given finishing point the means by which a full stack application can be put together. It's a simulation of a potential animal rescue listings site.
@@ -46,7 +54,7 @@ Fork the Initial Branch from the repository.
 
 You will need to create an env file ( it actually needs to be called .env ) for which you can use the .env.example as a baseplate. You will however need to substitute this section
 
-```
+```lang=js
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306

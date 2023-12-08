@@ -1,13 +1,13 @@
-# Configuring the Data Models
+---
+title: 'Configuring the Data Models'
+date: 2023-12-07
+author: Dom Sinclair
+avatar: https://avatars.githubusercontent.com/u/12199442
+twitter: '@vuedesigner'
+outline: deep
+---
 
-- [Configuring the Data Models](#configuring-the-data-models)
-  - [The First Model](#the-first-model)
-    - [A word about tooling](#a-word-about-tooling)
-    - [Creating the basic model in VSCode](#creating-the-basic-model-in-vscode)
-    - [Creating the basic model in PhpStorm (with Laravel Idea)](#creating-the-basic-model-in-phpstorm-with-laravel-idea)
-    - [What's the difference](#whats-the-difference)
-    - [Creating Relationships between Models](#creating-relationships-between-models)
-    - [The One to Many Relationship.](#the-one-to-many-relationship)
+# Configuring the Data Models
 
 If you've got to here then you will already have a working base application and a functional database.
 

@@ -1,3 +1,14 @@
+---
+title: 'Canine Rescue'
+titleTemplate: A full stack web application using Laravel, Inertia and Vue.js.
+
+date: 2023-12-05
+author: Dom Sinclair
+avatar: https://avatars.githubusercontent.com/u/12199442
+twitter: '@vuedesigner'
+outline: deep
+---
+
 # Canine Rescue Tutorials
 
 These tutorials are designed to be an introduction to creating a full stack web application with [Vue Designer](https://vuedesigner.com/) being used as the primary tool to configure and design the front end.
@@ -19,7 +30,3 @@ The tutorial code is in its own github repository. The Main branch represents th
 If you have any direct questions about the tutorials please raise them in the Discussions section in this repository of in the [Vue Designer Discord Group](https://discord.com/invite/CeXtx8hXYf).
 
 If you notice or encounter a specific technical issue with the tutorials then please raise an issue in the Issues section in this repository.
-
-## [Introduction](/Tutorials/introduction.md)
-
-## [Configuring the Data Models](/Tutorials/datamodels.md)

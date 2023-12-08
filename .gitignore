@@ -1,0 +1,15 @@
+docs/.vitepress/dist
+docs/.vitepress/cache
+
+node_modules
+
+# Pinegrow
+_pgbackup
+_pginfo
+
+## optional
+pinegrow.json
+## add any d.ts files that are auto-generated, for eg,
+auto-imports.d.ts
+components.d.ts
+composables.d.ts
