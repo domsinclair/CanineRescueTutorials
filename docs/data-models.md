@@ -200,7 +200,7 @@ Open up the project in PhpStorm, navigate to the Laravel menu (if you haven't go
 
 <br>
 
-![New Eloquent Model](/docs/images/datamodels1.jpg)
+![New Eloquent Model](images/datamodels1.jpg)
 
 <br>
 
@@ -208,7 +208,7 @@ Select 'New Eloquent Model'.
 
 <br>
 
-![New Eloquent Model Dialog](/docs/images/datamodel2.jpg)
+![New Eloquent Model Dialog](images/datamodel2.jpg)
 
 <br>
 
@@ -220,7 +220,7 @@ Here is our completed dialog.
 
 <br>
 
-![New Eloquent Model Dialog Filled In](/docs/images/datamodels3.jpg)
+![New Eloquent Model Dialog Filled In](images/datamodels3.jpg)
 
 <br>
 
