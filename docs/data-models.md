@@ -451,3 +451,19 @@ As you can see Laravel Idea is smart enough to pick up the fact that this is goi
 Once you've done that navigate to the AnimalType Model and this time just type hasMany and you'll be presented with the option to create a hasMany function for the Animal table.
 
 This is just one example of how PhpStorm combined with Laravel Idea can really speed up your development.
+
+<br>
+
+## Exercise Time
+
+Take some time to read the main Laravel Documentation on [Database Migrations](https://laravel.com/docs/10.x/migrations) and then when you've done that consider the diagram below.
+
+<br>
+
+<br>
+
+In the diagram are three tables, AnimalTypes, Animals and RescueCentres. They are all inter related. Those fields that are followed by NN are fields that should not be empty (in other words they should always have a value). The others are Nullable (they could contain a null value).
+
+By default Laravel migrations will automatically create the pk (primary key) field and the create_at and updated_at fields so you can ignore those.
+
+With those points in mind experiment at creating the relevant models and migrations. Use the fork of the initial branch to get started. Don't worry if you make mistakes you can always start over. The main purpose of the exercise is for you to become familiar with creating models and migrations in whatever environment you have available to work in.
