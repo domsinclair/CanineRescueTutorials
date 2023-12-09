@@ -411,16 +411,43 @@ Relationships are what makes a relational database so understanding what they ar
 
 The main Laravel documentation on the Eloquent ORM has an [excellent section on relationships](https://laravel.com/docs/10.x/eloquent-relationships#polymorphic-relationships) which we would urge to read before proceeding further. For the time being we'll be concentrating mainly on one to many relationships but we'd suggest bookmarking the documentation link for future reference.
 
-If youve read the documentation section you'll now know that we need to create relationship functions in our respective models.
+If you've read the documentation section you'll now know that we need to create relationship functions in our respective models, and add foreign id links in the migrations.
 
 As things currently stand we have an AnimalType model which could have many related records in the Animal Model. Let's now see how PhpStorm and Laravel Idea make creating this relationship very much easier.
 
 <br>
 
-### The One to Many Relationship.
+### Naming Conventions
 
 <br>
 
-We know that we have a one to many relationship between AnimalType and Animal , so AnimalType will require a function that returns a HasMany type.
+Before going any further it would make a great deal of sense to read the following blog post on [Namining conventions in Laravel](https://webdevetc.com/blog/laravel-naming-conventions/). Pay particular attention to the section on tables. If you follow the naming conventions then Laravel Idea will prove to be way more useful to you as you are about to see.
 
-Back in PhPStorm open up the AnimalType Model
+### The One to Many Relationship
+
+<br>
+
+In PhpStorm open up the animal migration and in the
+` Schema::create('animals', function (Blueprint $table)` add the following line.
+
+` $table->foreignId('animal_type_id');`
+
+When you go on to run `php artisan migrate` this will add a foreign key to the animals table that links back to the animal_types table. Once you've done that be sure to go the the Laravel menu on the main toolbar and click 'Generate Helper Code'.
+
+In a one to many relationship we could say that an Animal 'belongsTo' an AnimalType and that an AnimalType 'hasMany' animals.
+
+In the respective models we will need to create functions that represent this. Fortunately (assuming that you have added the relevant entry in the animals migration) Laravel Idea is about to make this really easy for us.
+
+Open up the Animal Model and within the body of the class type 'belongs'.
+
+<br>
+
+![Belongs To Refactoring](images/belongsto.gif)
+
+<br>
+
+As you can see Laravel Idea is smart enough to pick up the fact that this is going to ,ost likely be a belongsTo relationship with the AnimalType and accordingly offers that as its first suggestion. as soon as you select it you'll have the necessary function.
+
+Once you've done that navigate to the AnimalType Model and this time just type hasMany and you'll be presented with the option to create a hasMany function for the Animal table.
+
+This is just one example of how PhpStorm combined with Laravel Idea can really speed up your development.
