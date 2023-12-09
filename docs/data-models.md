@@ -460,6 +460,8 @@ Take some time to read the main Laravel Documentation on [Database Migrations](h
 
 <br>
 
+![Database Diagram](images/datamodels4.jpg)
+
 <br>
 
 In the diagram are three tables, AnimalTypes, Animals and RescueCentres. They are all inter related. Those fields that are followed by NN are fields that should not be empty (in other words they should always have a value). The others are Nullable (they could contain a null value).
