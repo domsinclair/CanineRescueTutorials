@@ -244,7 +244,7 @@ Save everything and then once again run the command
 
 `php artisan migrate:fresh --seed`
 
-Examine the users table once again, making a metal note of the entries.
+Examine the users table once again, making a mental note of the entries.
 
 Now run the command again, close DB Browser (if you hadn't already) reopen the it, open the database and browse the data in the users table. This time it will be the same as before.
 
