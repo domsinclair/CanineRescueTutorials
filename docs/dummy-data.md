@@ -618,3 +618,11 @@ class DatabaseSeeder extends Seeder
 <br>
 
 Finally run the command `php artisan migrate:fresh --seed` and examine the database and in particular the animals table which meets all of our requirements.
+
+<br>
+
+## Exercise
+
+<br>
+
+Now that you've seen how we can use the Factories to create dummy data that meets our requirements try doing some experiments of your own to see just how you can add code to the factory to get the results that you want.
