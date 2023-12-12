@@ -459,4 +459,10 @@ class DatabaseSeeder extends Seeder
 }
 ```
 
+<br>
+
 Once again run the command `php artisan migrate:fresh --seed` and then examine the database and very specifically the data in the rescue_centres table. There should be ten entries with correctly configures names for the rescue centres.
+
+<br>
+
+### Animals
