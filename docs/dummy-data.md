@@ -96,7 +96,9 @@ class DatabaseSeeder extends Seeder
 }
 ```
 
-If you look closely at the code that is commented out in the `run()` method you'll see reference to factory. Factories are what Laravel now uses as the main way to add fake data to tables. Indeed depending on how you chose to create your models for the exerciseat the end of the Data Models section you may well have created factories at the same time as you created the models.
+<br>
+
+If you look closely at the code that is commented out in the `run()` method you'll see reference to factory. Factories are what Laravel now uses as the main way to add fake data to tables. Indeed depending on how you chose to create your models for the exercise at the end of the Data Models section you may well have created factories at the same time as you created the models.
 
 Let's look at the User Factory created by default with your base application (it's in database/factories).
 
@@ -240,6 +242,8 @@ class DatabaseSeeder extends Seeder
 }
 ```
 
+<br>
+
 Save everything and then once again run the command
 
 `php artisan migrate:fresh --seed`
@@ -344,6 +348,8 @@ class DatabaseSeeder extends Seeder
     }
 }
 ```
+
+<br>
 
 What is going on here? Put simply we are instructing the AnimalTypeFactory to create two records. As those records are created the value entered into the 'name' field is to come from the pre defined sequence that has been provided.
 
@@ -466,3 +472,149 @@ Once again run the command `php artisan migrate:fresh --seed` and then examine t
 <br>
 
 ### Animals
+
+<br>
+
+Creating records for the animals table will not be quite so straightforward. In the fist case there are going to need to be direct links to actual records in both the animal_types and rescue_centres tables. As we kept the number of records created for each of those to a relatively small fixed limit (and rather usefully in this instance) went with the default incremental integer as a primary key that Laravel does by default) we can simply pick random integer values from the ranges we know to exist ( 1-2 and 1-10 ).
+
+Breed will need to reflect dog or cat breeds.
+
+The gender field will need to be one of Male or Female.
+
+Most rescue centres neuter the animals before allowing them to be adopted so we want to reflect that bias in the data we create.
+
+Lastly an animal that may not be ready for adoption may still be a suitable candidate for foster but an animal that isn't suitable to foster definitely won't be ready for adoption, a fact which we will also need to try and replicate realistically.
+
+Here is the current definition for Animal in the Factory.
+
+<br>
+
+```php
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name(),
+            'breed' => $this->faker->word(),
+            'gender' => $this->faker->word(),
+            'neutered' => $this->faker->boolean(),
+            'description' => $this->faker->text(),
+            'available_to_foster' => $this->faker->boolean(),
+            'available_to_adopt' => $this->faker->boolean(),
+            'additional_information' => $this->faker->word(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ];
+    }
+```
+
+<br>
+
+Let's start to work through this.
+
+'name' we can live with it really doesn't matter what gets generated.
+
+We don't have anything for the animal_type_id and that is required. There are only two records so a simple integer choice of either 1 or 2 should suffice. We can achieve that like this `'animal_type_id'=>$this->faker->numberBetween(1, 2)` and by extension we get `'rescue_centre_id'=>$this->faker->numberBetween(1, 10)`.
+
+'breed' is going to require something specific to the animal type. For that we'll probably need an if statement based on the value allotted to animal type.
+
+'gender' has to be Male or Female. this should suffice `'gender' => $this->faker->randomElements(['Male','Female'])`
+
+'available_to_adopt' is also going o require some sort of conditional.
+
+Time to see what we can devise.
+
+<br>
+
+```php
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Animal;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
+
+class AnimalFactory extends Factory
+{
+    protected $model = Animal::class;
+
+    public function definition(): array
+    {
+        $animalType = $this->faker->numberBetween(1, 2);
+        $canFoster = $this->faker->boolean();
+        $animal = [
+            'name' => $this->faker->name(),
+            'animal_type_id'=>$animalType,
+            'rescue_centre_id'=>$this->faker->numberBetween(1, 10),
+            'gender' => $this->faker->randomElement($array = array('Male','Female')),
+            'neutered' => $this->faker->boolean(90),
+            'description' => $this->faker->text(),
+            'available_to_foster' => $canFoster,
+            'additional_information' => $this->faker->text(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ];
+        if($animalType === 1) {
+            $animal['breed'] = $this->faker->randomElement($array = array('Greyhound', 'Deerhound', 'Lurcher'));
+        }
+            else{
+                $animal['breed'] = $this->faker->randomElement($array = array('British Shorthair', 'Bengal','Mixed Breed'));
+            }
+
+
+        if ($canFoster=== False){
+            $animal['available_to_adopt']= $canFoster;
+        }else
+        {
+            $animal['available_to_adopt']= $this->faker->boolean();
+        }
+
+        return $animal;
+    }
+}
+```
+
+<br>
+
+Now amend the DatabaseSeeder.
+
+<br>
+
+```php
+<?php
+
+namespace Database\Seeders;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Doctrine\DBAL\Schema\Sequence;
+use Faker\Generator;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     */
+    public function run(Generator $faker): void
+    {
+        $faker->seed(100);
+
+        \App\Models\AnimalType::factory()
+            ->count(2)
+            ->sequence(
+                ['name' => 'Dog'],
+                ['name' => 'Cat'],
+            )
+            ->create();
+
+        \App\Models\Rescue_Centre::factory(10)->create();
+
+        \App\Models\Animal::factory(100)->create();
+
+    }
+}
+```
+
+<br>
+
+Finally run the command `php artisan migrate:fresh --seed` and examine the database and in particular the animals table which meets all of our requirements.
