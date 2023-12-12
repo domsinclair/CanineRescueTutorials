@@ -249,3 +249,214 @@ Examine the users table once again, making a mental note of the entries.
 Now run the command again, close DB Browser (if you hadn't already) reopen the it, open the database and browse the data in the users table. This time it will be the same as before.
 
 You can now generate consistent random data time after time after time.
+
+<br>
+
+## Generating data for the new data models
+
+<br>
+
+At the end of the last section if you followed the exercise there were three data models to be added. Whilst these will probably change a bit they are certainly useful to use as test cases to demonstrate how to go about customising the factory classes to create data that we'll be able to use constructively as we build out the application.
+
+Let's quickly remind ourselves of the models in question.
+
+<br>
+
+![Database Diagram](images/datamodels4.jpg)
+
+<br>
+
+When fake data is constructed that involves related tables careful attention needs to be paid to the relationship types. In the case of one to many relationships the one part will need to exist before the many part can ce created. What that boils down to is that before we consider creating fake data for the animals table we'll need to have data in both the animal_types table and the rescue_centres table.
+
+<br>
+
+### Animal_Types
+
+<br>
+
+Using Laravel Idea to create the Animal_Type model and associated factory led to this being created;
+
+<br>
+
+```php
+<?php
+
+namespace Database\Factories;
+
+use App\Models\AnimalType;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
+
+class AnimalTypeFactory extends Factory
+{
+    protected $model = AnimalType::class;
+
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ];
+    }
+}
+```
+
+<br>
+
+Looking at the Faker documentation it soon becomes apparent that it has no ready made option for actual animal genus names. Whilst we could ignore that and go with just conventional first names it would be much easier to have something specific. As we could make do with just Dog and Cat for the time being let's just create two specific records.
+
+Make the following change to the DatabaseSeeder.
+
+<br>
+
+```php
+<?php
+
+namespace Database\Seeders;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Doctrine\DBAL\Schema\Sequence;
+use Faker\Generator;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     */
+    public function run(Generator $faker): void
+    {
+        $faker->seed(100);
+         // \App\Models\User::factory(10)->create();
+
+        \App\Models\AnimalType::factory()
+            ->count(2)
+            ->sequence(
+                ['name' => 'Dog'],
+                ['name' => 'Cat'],
+            )
+            ->create();
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+    }
+}
+```
+
+What is going on here? Put simply we are instructing the AnimalTypeFactory to create two records. As those records are created the value entered into the 'name' field is to come from the pre defined sequence that has been provided.
+
+Run the command `php artisan migrate:fresh --seed` and then examine the database and specifically the values added to the animal_types table. You'll see two records, one for Dog and one for Cat.
+
+<br>
+
+### Rescue_Centres
+
+The default RescueCentreFactory created by Laravel Idea looked like this;
+
+<br>
+
+```php
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Rescue_Centre;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
+
+class Rescue_CentreFactory extends Factory
+{
+    protected $model = Rescue_Centre::class;
+
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name(),
+            'location' => $this->faker-word(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ];
+    }
+}
+```
+
+<br>
+
+there are two things that aren't going to work with this, the first is the choice of word() for producing location. We could really do with something a little more meaningful here Faker does have a city() option but that will be determined by the default locale used for the faker. In a default Laravel app that's going to be 'en-US'. As I'm based in the UK that ought to be changed.
+
+Open the app.php file and find the `'faker_locale' => 'en_US',` entry. Change it to what suits you.
+
+With that done we'll make some small changes to the RescueCentreFactory.
+
+<br>
+
+```php
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Rescue_Centre;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
+
+class Rescue_CentreFactory extends Factory
+{
+    protected $model = Rescue_Centre::class;
+
+    public function definition(): array
+    {
+        $town = $this->faker->city();
+        return [
+            'name' => $town.' Animal Rescue Centre',
+            'location' => $town,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ];
+    }
+}
+```
+
+<br>
+
+What's going on here? For each record that gets created we're initially generating a city. That city will be used for the location but we also want a meaningful name for the rescue centre as well so generating it first and ten using it in two bits of the generator makes sense.
+
+Now amend the DatabaseSeeder.
+
+<br>
+
+```php
+<?php
+
+namespace Database\Seeders;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Doctrine\DBAL\Schema\Sequence;
+use Faker\Generator;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     */
+    public function run(Generator $faker): void
+    {
+        $faker->seed(100);
+
+        \App\Models\AnimalType::factory()
+            ->count(2)
+            ->sequence(
+                ['name' => 'Dog'],
+                ['name' => 'Cat'],
+            )
+            ->create();
+
+        \App\Models\Rescue_Centre::factory(10)->create();
+
+    }
+}
+```
+
+Once again run the command `php artisan migrate:fresh --seed` and then examine the database and very specifically the data in the rescue_centres table. There should be ten entries with correctly configures names for the rescue centres.
