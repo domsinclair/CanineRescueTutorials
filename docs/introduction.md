@@ -1,9 +1,9 @@
 ---
-title: 'Introduction'
+title: "Introduction"
 date: 2023-12-06
 author: Dom Sinclair
 avatar: https://avatars.githubusercontent.com/u/12199442
-twitter: '@vuedesigner'
+twitter: "@vuedesigner"
 ---
 
 # Introduction
@@ -22,7 +22,7 @@ The tutorial can be found on Github (insert link here). The main branch represen
 
 ## The stack
 
-The application at the outset uses Laravel, Jetsream, Inertia and Vue.js with Tailwind and SQLite. As it develops and other pieces may be required then they will be introduced at the appropriate time.
+The application at the outset uses Laravel, Breezeand Nuxt.js with Tailwind and SQLite. As it develops and other pieces may be required then they will be introduced at the appropriate time.
 
 In addition to [Vue Designer](https://vuedesigner.com/) you'll require [VSCode](https://code.visualstudio.com/) and or [PhpStorm](https://www.jetbrains.com/phpstorm/) (ideally with the [Laravel Idea](https://laravel-idea.com/) extension). You'll also need a tool to examine and interact with the SQLite database. We're going to suggest [DB Browser for SQLite](https://github.com/sqlitebrowser/sqlitebrowser/releases/tag/v3.12.2) for the simple reason that there are versions available for both windows and Mac which makes it easy to produce consistent material for these tutorials.
 
