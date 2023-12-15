@@ -20,6 +20,9 @@ You may however decide to have a little more intervention at this stage and lear
 ## Laravel / Inertia
 
 <br>
+The first full stack application is built with Laravel, Jetstream and Inertia.js
+
+<br>
 
 ### Repository Clone
 
