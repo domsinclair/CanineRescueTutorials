@@ -17,6 +17,7 @@ export default defineConfig({
         items: [
           { text: "Home", link: "/" },
           { text: "Introduction", link: "/introduction" },
+          { text: "Installing The Code", link: "/installing" },
           { text: "Data Models", link: "/data-models" },
           { text: "Dummy Data", link: "/dummy-data" },
           { text: "Command Aliasing", link: "/aliasing" },
