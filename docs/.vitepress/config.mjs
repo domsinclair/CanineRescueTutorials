@@ -4,7 +4,7 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "Canine Rescue",
   description:
-    "A full stack web application using Laravel, Inertia and Vue.js.",
+    "A full stack web application using Laravel, Inertia and Vue.js or Laravel and Nuxt",
   themeConfig: {
     // // https://vitepress.dev/reference/default-theme-config
     // nav: [
