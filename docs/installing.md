@@ -1,3 +1,10 @@
+---
+title: "Installing The Code"
+date: 2023-12-06
+author: Dom Sinclair
+outline: deep
+---
+
 # Installing The Code
 
 <br>

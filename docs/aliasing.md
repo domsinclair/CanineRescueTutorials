@@ -1,3 +1,10 @@
+---
+title: "Command Aliasing"
+date: 2023-12-06
+author: Dom Sinclair
+outline: deep
+---
+
 # Command Aliasing
 
 <br>

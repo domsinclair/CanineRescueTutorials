@@ -2,8 +2,7 @@
 title: "Introduction"
 date: 2023-12-06
 author: Dom Sinclair
-avatar: https://avatars.githubusercontent.com/u/12199442
-twitter: "@vuedesigner"
+outline: deep
 ---
 
 # Introduction
