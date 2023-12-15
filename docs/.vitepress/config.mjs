@@ -19,6 +19,8 @@ export default defineConfig({
           { text: "Introduction", link: "/introduction" },
           { text: "Data Models", link: "/data-models" },
           { text: "Dummy Data", link: "/dummy-data" },
+          { text: "Command Aliasing", link: "/aliasing" },
+          { text: "Routes", link: "/routes" },
         ],
       },
     ],
