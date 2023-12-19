@@ -43,4 +43,4 @@ Testing will also be looked at. It remains a good idea to have tests for your co
 
 Finally we will go on to cover deployment.
 
-> Not all of this will be 100% Vue Designer centric, it is after all a full stack application but the intention is to demonstrate how view designer can become a useful addition to your tool stack when creating full stack apps.
+> Not all of this will be 100% Vue Designer centric, it is after all a full stack application but the intention is to demonstrate how Vue Designer can become a useful addition to your tool stack when creating full stack apps.

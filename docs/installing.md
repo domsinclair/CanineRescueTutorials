@@ -28,7 +28,9 @@ The first full stack application is built with Laravel, Jetstream and Inertia.js
 
 <br>
 
-The repository to clone is located here
+The repository to clone is located [here](https://github.com/domsinclair/animalrescue).
+
+Download the Initial branch if you want to start working your way through the tutorials.
 
 <br>
 
