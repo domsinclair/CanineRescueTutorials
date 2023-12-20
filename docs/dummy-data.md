@@ -231,7 +231,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(Generator $faker): void
     {
-        $faker->seed(100);
+        $faker->seed(8792);
          \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
@@ -511,7 +511,7 @@ Here is the current definition for Animal in the Factory.
 
 Let's start to work through this.
 
-'name' we can live with it really doesn't matter what gets generated.
+'name' we can live with it really doesn't matter what gets generated, however that will generate a full name in reality so let's change that ti firstName.
 
 We don't have anything for the animal_type_id and that is required. There are only two records so a simple integer choice of either 1 or 2 should suffice. We can achieve that like this `'animal_type_id'=>$this->faker->numberBetween(1, 2)` and by extension we get `'rescue_centre_id'=>$this->faker->numberBetween(1, 10)`.
 
@@ -543,7 +543,7 @@ class AnimalFactory extends Factory
         $animalType = $this->faker->numberBetween(1, 2);
         $canFoster = $this->faker->boolean();
         $animal = [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->firstName(),
             'animal_type_id'=>$animalType,
             'rescue_centre_id'=>$this->faker->numberBetween(1, 10),
             'gender' => $this->faker->randomElement($array = array('Male','Female')),
