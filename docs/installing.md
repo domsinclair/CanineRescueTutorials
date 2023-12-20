@@ -32,6 +32,50 @@ The repository to clone is located [here](https://github.com/domsinclair/animalr
 
 Download the Initial branch if you want to start working your way through the tutorials.
 
+as soon as it's been downloaded you will need to ensure that you have a .env file. The repo has an example and all you need to to create one is execute the following command at the terminal.
+
+<br>
+
+```
+cp .env.example .env
+```
+
+<br>
+
+With that done save the project and run the following three commands;
+
+```
+php artisan migrate
+php artisan serve
+npm run dev
+```
+
+> If at this stage you meet an error along these lines; could not find driver (SQL: PRAGMA foreign_keys = ON;) then type the following command into the terminal
+>
+> <br>
+>
+> ```bash
+> php --ini
+> ```
+>
+> <br>
+>
+> This will tell you exactly where your php.ini file is located. Navigate to and open that file and search it to find this line.
+>
+> `;extension=pdo_sqlite`
+>
+> Uncomment the line by removing the semi colon at the start and save the file.
+
+Open up Vue Designer. Once open select Open Project and navigate to the folder where your newly created project resides and open it. In a few moments once Vue Designer has recognised everything you should see an 'Open Startup Page' in the main browser window. Click it and you should be presented with the following;
+
+<br>
+
+![Welcome Screen](images/installation1.jpg)
+
+<br>
+
+Congratulations you're good to go.
+
 <br>
 
 ### The Manual Approach
@@ -202,4 +246,4 @@ Open up Vue Designer. Once open select Open Project and navigate to the folder w
 
 <br>
 
-Congratulations you good to go.
+Congratulations you're good to go.
