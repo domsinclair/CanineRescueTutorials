@@ -22,6 +22,7 @@ export default defineConfig({
           { text: "Dummy Data", link: "/dummy-data" },
           { text: "Command Aliasing", link: "/aliasing" },
           { text: "Routes", link: "/routes" },
+          { text: "Installing PrimeVue", link: "/primevue" },
         ],
       },
     ],

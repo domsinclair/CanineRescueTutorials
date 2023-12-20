@@ -46,11 +46,15 @@ cp .env.example .env
 
 With that done save the project and run the following three commands;
 
+<br>
+
 ```
 php artisan migrate
 php artisan serve
 npm run dev
 ```
+
+<br>
 
 > If at this stage you meet an error along these lines; could not find driver (SQL: PRAGMA foreign_keys = ON;) then type the following command into the terminal
 >
@@ -239,6 +243,8 @@ npm run dev
 > `;extension=pdo_sqlite`
 >
 > Uncomment the line by removing the semi colon at the start and save the file.
+
+<br>
 
 Open up Vue Designer. Once open select Open Project and navigate to the folder where your newly created project resides and open it. In a few moments once Vue Designer has recognised everything you should see an 'Open Startup Page' in the main browser window. Click it and you should be presented with the following;
 
