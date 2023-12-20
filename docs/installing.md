@@ -37,6 +37,8 @@ as soon as it's been downloaded you will need to ensure that you have a .env fil
 <br>
 
 ```
+npm install
+composer install
 cp .env.example .env
 ```
 
