@@ -23,6 +23,7 @@ export default defineConfig({
           { text: "Command Aliasing", link: "/aliasing" },
           { text: "Routes", link: "/routes" },
           { text: "Installing PrimeVue", link: "/primevue" },
+          { text: "A New Home Page", link: "/new_home_page" },
         ],
       },
     ],
