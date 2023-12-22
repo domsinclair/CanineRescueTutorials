@@ -9,7 +9,11 @@ outline: deep
 
 <br>
 
-## Stage one
+## Laravel / Inertia
+
+<br>
+
+### Stage one
 
 <br>
 
@@ -33,7 +37,7 @@ Extract the contents of that file to the 'resources/js' folder in your applicati
 
 <br>
 
-## Stage two
+### Stage two
 
 <br>
 
@@ -170,11 +174,11 @@ Click on the Insert button on the Toolbar. If all ahs gone according to plan you
 
 <br>
 
-## Stage three
+### Stage three
 
 <br>
 
-Now we need to complete another configuration step in View Designer.
+Now we need to complete another configuration step in Vue Designer.
 
 Open the Config panel. and seek out the highlighted section.
 
