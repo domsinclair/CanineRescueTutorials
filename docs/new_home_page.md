@@ -38,3 +38,37 @@ It should open up on the welcome page.
 ![Welcome Page](images/installation1.jpg)
 
 <br>
+
+At this point it is impossible to continue without first registering and or logging into site. The inbuilt authorisation that is being provided by Laravel and Jetstream is really impressive and we will want to use it but we don't really want to put potential adoptees off looking for an animal to adopt by forcing them to have to register with the site and then login.
+
+The vast majority of people that use are application will just be browsing and that experience needs to be made as easy as possible and also as fast as possible.
+
+What this means is that we're going to have to provide a home page for the application that is welcoming and easy to use. We won't delete , as yet, what has been provided given that we know that we will require authorisation for certain features that we intend to provide but we will create a brand new home page for the app.
+
+<br>
+
+## A new home page
+
+<br>
+
+### Creating the layout
+
+<br>
+
+In the resources/js/Layouts folder create a new file MainLayout.vue
+
+Truthfully the actual name is academic (the file extension however isn't) but as it's the intension to use this layout everywhere then MainLayout is at least self explanatory.
+
+With that created scaffold ot the absolute basics.
+
+<br>
+
+```js
+<script setup>
+</script>
+
+<template>
+</template>
+```
+
+<br>
