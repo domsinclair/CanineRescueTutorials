@@ -330,28 +330,42 @@ Now let's do something about seeing the actual data.
 
 ## Displaying data on the new page
 
-## A new home page
-
 <br>
 
-### Creating the layout
+If you followed the instructions to load the PrimeVue components you should now have access, amongst many other things to a Data Table, and we're going to use that to display our rescue centres.
 
-<br>
-
-In the resources/js/Layouts folder create a new file MainLayout.vue
-
-Truthfully the actual name is academic (the file extension however isn't) but as it's the intension to use this layout everywhere then MainLayout is at least self explanatory.
-
-With that created scaffold ot the absolute basics.
+Open up your newly create Index.vue and alter the code in it so that it resembles the following;
 
 <br>
 
 ```js
 <script setup>
-</script>
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
 
+const props = defineProps({
+    rescueCentres: Array
+});
+</script>
 <template>
+    <div class="card mt-10">
+        <DataTable :value="rescueCentres" class="border max-w-lg ml-4 rounded-t-2xl" striped-rows>
+            <!--            <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header"></Column>-->
+            <Column class="font-semibold text-white" field='name' header="Name"  :sortable="true"></Column>
+            <Column class="text-white" field='location' header="Location"></Column>
+        </DataTable>
+    </div>
 </template>
 ```
 
 <br>
+
+Make sure that you app is running, navaigate to the Rescue Centres page and you should see something like this.
+
+<br>
+
+![Data On Screen](/docs/images/firstview1.jpg)
+
+<br>
+
+Your actual data may be a little different but if you have data there then give yourself a pat on the back.
