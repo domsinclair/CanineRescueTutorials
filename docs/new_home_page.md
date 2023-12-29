@@ -5,7 +5,7 @@ author: Dom Sinclair
 outline: deep
 ---
 
-# A New Home Page
+# A New Home Page (Part One)
 
 <br>
 
@@ -46,6 +46,240 @@ The vast majority of people that use are application will just be browsing and t
 What this means is that we're going to have to provide a home page for the application that is welcoming and easy to use. We won't delete , as yet, what has been provided given that we know that we will require authorisation for certain features that we intend to provide but we will create a brand new home page for the app.
 
 <br>
+
+## Time to discover how this all works
+
+<br>
+
+Before we go any further we need to really understand how this application works. Laravel and Inertia is really all about Links and Routing, along with some rather important naming conventions and general folder layout.
+
+Needless to say none of this is really spelt out, or perhaps to be fair it is but in wildly disparate places and unless you're a meticulous note taker and capable of realising that you've just read something that might come in handy later on the odds are that this is the bit that's going to be the most difficult to grasp.
+
+With that in mind here's what we're going to do to get started.
+
+We know by now that we have a database , with tables in it and data in those tables. Let's try and display some of that data on a fresh page in the application. Nothing fancy here, no awards for making it look pretty. The goal is simple. There are ten rows of data in the rescue-centres table and we'd like to see them on a page (preferably in a table) that we can access from the main welcome page.
+
+<br>
+
+> At this point it would be sensible, if you've not done so already, to look at this [sample project](https://github.com/inertiajs/pingcrm). This is by far the best sample I looked at and it gave me more of an idea as to what is going on in this type of application than anything else. It didn't answer every question but it did provide enough information to enable me to ask more relevant questions of the search engines and indeed a couple of useful forums.
+
+<br>
+
+### Start at the end
+
+<br>
+
+It's perhaps a little counter intuitive but it will probably make sense if you start at what will become your final destination. You won't need to always take this approach but initially this is going to help you understand how all the Inertia plumbing actually works.
+
+This is going to very neatly introduce the first little convention that's going to make life much easier, a well defined folder structure for our eventual views/pages.
+
+By covention the Pages of the app are stored in the following folder;
+
+`resources/js/Pages`
+
+In the Pages folder add a new folder called 'RescueCentres'.
+
+In that folder add a new file (if using PhpSorm, right click on your new folder select New/Vue component) and call it Index.
+
+PhpStorm will scaffold out the following;
+
+<br>
+
+```js
+<script setup>
+
+</script>
+
+<template>
+
+</template>
+
+<style scoped>
+
+</style>
+```
+
+<br>
+
+Within the template section add the following;
+
+```js
+<div>Welcome to the Rescue Centres</div>
+```
+
+Remember there are no prizes for design at the moment we just want to know that we've hit the right page. With that done save your work and we'll press on.
+
+<br>
+
+### Linking to the new page
+
+<br>
+
+Open up the Welcome.vue page and once it's open search the File for the word 'Sponsor'. We're going to put our new link just beneath that al it will be easy to spot. I'll be somewhere close to line number 90.
+
+Add the following below the closing div that contains the Sponsor details;
+
+<br>
+
+```js
+<div>
+  <Link href="/rescuecentres">Rescue Centres</Link>
+</div>
+```
+
+<br>
+
+What you're looking at is a special Inertia link (you can read more about those [here](https://inertiajs.com/links)) that works some special magic to make the SPA experience better.
+
+This bit of the link `href="/rescuecentres"` is the url that is in fact resolved, for want of a better term, by the Route. With that in mind we're now going to need a Route and we'll be adding that in the Web.php file located in the routes folder of your application.
+
+<br>
+
+### Creating the Route
+
+<br>
+
+Open up the web.php file and within it add the following;
+
+<br>
+
+```php
+Route::get('rescuecentres',[\App\Http\Controllers\RescueCentreController::class, 'index'])
+    ->name('rescuecentres');
+```
+
+<br>
+
+What are we looking at here, once again turning to the [ineria documentation](https://inertiajs.com/routing) is going to provide some useful information.
+
+Essentially though what we have here is a Route between the Controller for our RescueCentre model and and the location at which we're going to display it.
+
+On our trek backwards it seems that we now need to visit the RescueCentreController.
+
+<br>
+
+### Getting to know the controller
+
+<br>
+
+If you used the Laravel Idea New Eloquent Model wizard to create you Model(s) then you could have created a Controller at the came time , there are also options to do so with `php artisan make` . Either way you will probably have ended up with something like this;
+
+<br>
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+use App\Models\RescueCentre;
+use Illuminate\Http\Request;
+
+class RescueCentreController extends Controller
+{
+    public function index()
+    {
+       return RescueCentre::all()
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+
+        ]);
+
+        return RescueCentre::create($data);
+    }
+
+    public function show(RescueCentre $rescueCentre)
+    {
+        return $rescueCentre;
+    }
+
+    public function update(Request $request, RescueCentre $rescueCentre)
+    {
+        $data = $request->validate([
+
+        ]);
+
+        $rescueCentre->update($data);
+
+        return $rescueCentre;
+    }
+
+    public function destroy(RescueCentre $rescueCentre)
+    {
+        $rescueCentre->delete();
+
+        return response()->json();
+    }
+}
+```
+
+<br>
+
+What we have here is a straightforward scaffolded collection of methods to show all of the Rescue Centres, one of them and to edit or delete one of them. These have been designed with basic Laravel in mind, not quite what we want with Inertia but it's a good starting point and there's not much we need to change.
+
+In this case for the time being, as we just want to see all of the Rescue Centres we'll work with the Index method.
+
+Alter the controller so that it looks like this.
+
+<br>
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+use App\Models\RescueCentre;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+class RescueCentreController extends Controller
+{
+    public function index()
+    {
+        $rescueCentres = RescueCentre::all();
+        return Inertia::render('RescueCentres/Index', ['rescueCentres' => $rescueCentres]);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+
+        ]);
+
+        return RescueCentre::create($data);
+    }
+
+    public function show(RescueCentre $rescueCentre)
+    {
+        return $rescueCentre;
+    }
+
+    public function update(Request $request, RescueCentre $rescueCentre)
+    {
+        $data = $request->validate([
+
+        ]);
+
+        $rescueCentre->update($data);
+
+        return $rescueCentre;
+    }
+
+    public function destroy(RescueCentre $rescueCentre)
+    {
+        $rescueCentre->delete();
+
+        return response()->json();
+    }
+}
+```
+
+<br>
+
+The only method we've altered to work with Inertia is the index method. What are we doing there.
+
+- First were creating a variable $rescueCentres which we are setting to be equal to all of the Rescue Centres stored in the rescue-centres table in the database.
+- Next we are telling Inertia to render the Index view that resides in the RescueCentres folder in the Pages folder and passing to it the data we have retrieved from the table.
 
 ## A new home page
 
