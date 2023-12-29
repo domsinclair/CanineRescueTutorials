@@ -281,6 +281,55 @@ The only method we've altered to work with Inertia is the index method. What are
 - First were creating a variable $rescueCentres which we are setting to be equal to all of the Rescue Centres stored in the rescue-centres table in the database.
 - Next we are telling Inertia to render the Index view that resides in the RescueCentres folder in the Pages folder and passing to it the data we have retrieved from the table.
 
+<br>
+
+> Although technically we don't require it for this if you haven't already creat a RescueCentreResponse (essentially a function that returns a Rescue centre in json format)
+>
+> It should look something like this;
+>
+> <br>
+>
+> ```php
+> <?php
+>
+> namespace App\Http\Resources;
+>
+> use Illuminate\Http\Request;
+> use Illuminate\Http\Resources\Json\JsonResource;
+>
+> /** @mixin \App\Models\RescueCentre */
+> class RescueCentreResource extends JsonResource
+> {
+>    public function toArray(Request $request): array
+>    {
+>        return [
+>            'id' => $this->id,
+>            'name' => $this->name,
+>            'location' => $this->location,
+>            'created_at' => $this->created_at,
+>            'updated_at' => $this->updated_at,
+>        ];
+>    }
+> }
+> ```
+
+<br>
+
+With that all done save your work.
+
+Run the following two commands;
+
+`php artisan serve`
+`npm run dev`
+
+At the bottom of the welcome page you should see your new Rescue Centre link and if you click on that you should be taken to the new view that you created displaying just your welcome message.
+
+Now let's do something about seeing the actual data.
+
+<br>
+
+## Displaying data on the new page
+
 ## A new home page
 
 <br>
