@@ -369,3 +369,7 @@ Make sure that you app is running, navaigate to the Rescue Centres page and you 
 <br>
 
 Your actual data may be a little different but if you have data there then give yourself a pat on the back.
+
+Now that we have some data on a page let's try to improve on this by showing which animals a rescue centre actually has. It should be possible to do this because we know that there is a relationship between the rescue-centres table and the animals table.
+
+Before we do that though it might be sensible to talk about Laravel's Eloquent ORM.

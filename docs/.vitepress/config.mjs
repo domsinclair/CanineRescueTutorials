@@ -24,6 +24,7 @@ export default defineConfig({
           { text: "Routes", link: "/routes" },
           { text: "Installing PrimeVue", link: "/primevue" },
           { text: "A New Home Page", link: "/new_home_page" },
+          { text: "Eloquent ORM", link: "/eloquent" },
         ],
       },
     ],
