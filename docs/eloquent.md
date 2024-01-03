@@ -98,3 +98,5 @@ This won't be an easy exercise but you'l definitely have learnt a lot about quer
 ## Query efficiency
 
 <br>
+
+One of the most important things to do as you start to create the various queries that will power the vies in your application is to ensure that the queries that you create run efficiently.
