@@ -97,4 +97,32 @@ This won't be an easy exercise but you'l definitely have learnt a lot about quer
 
 <br>
 
-One of the most important things to do as you start to create the various queries that will power the vies in your application is to ensure that the queries that you create run efficiently.
+One of the most important things to do as you start to create the various queries that will power the views in your application is to ensure that the queries that you create run efficiently.
+
+<br>
+
+### Measuring efficiency
+
+<br>
+
+In order to make efficiency savings we're first going to need a means to actual measure just how efficient what we have is. Fortunately there is a great tool that will help you [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar).
+
+Follow the instructions provided to install the tool and if you want a primer on how to use it then the following [YouTube Video](https://www.youtube.com/watch?v=m4yGbEHwN4Q) should give you some pointers.
+
+<br>
+
+### Exercise
+
+<br>
+
+Try doing some experimentation with the Laravel Debugbar to see how it works and to get a feel for both what it does and how the information that it provides about the app can be used to make it behave behave more efficiently.
+
+<br>
+
+## Making the queries more efficient
+
+<br>
+
+Now that we have the debugbar installed lets start to look at improving what we have done so far and how it can help us when we turn our attention to creating a new view.
+
+If you just happen to have a [Laracasts](https://laracasts.com/) subscription then you'll find that [this course](https://laracasts.com/series/eloquent-performance-patterns) will be of immense benefit. It is classed as an 'Advanced' course implying that you'll need to have a good working knowledge of the whole subject of querying databases. If you're a complete novice in that field then this course is probably not for you just yet but on the other hand if you are reasonably proficient in SQL but perhaps not so in Eloquent queries then you'll find this a fascinating course from which you can learn a great deal.
