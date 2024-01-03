@@ -364,7 +364,7 @@ Make sure that you app is running, navaigate to the Rescue Centres page and you 
 
 <br>
 
-![Data On Screen](/docs/images/firstview1.jpg)
+![Data On Screen](images/firstview1.jpg)
 
 <br>
 
