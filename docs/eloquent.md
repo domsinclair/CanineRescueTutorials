@@ -5,8 +5,6 @@ author: Dom Sinclair
 outline: deep
 ---
 
-# Eloquent ORM
-
 <br>
 
 Eloquent is Laravel's Object Relational Mapper. Without going into too much technical detail ORM's take care of handling the necessary interaction with the database. This avoids the need for you to have to continually make connections, fetch and return data (via custom SQL queries) and finally close connections to the database.
