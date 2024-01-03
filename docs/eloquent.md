@@ -92,3 +92,9 @@ For a seasoned practitioner of SQL the Eloquent syntax may seem a little odd but
 This may very well prove to be the most complex thing you have yet to master in the application so take some time, if you're lucky enough to be using PhpStorm to experiment writing SQL queries that you can then convert into Eloquent queries to display in your view. Remember that for the time being these will need to be queries that return rescue centres as the result but you can query those on both the animals (and their respective types), that they contain. Moreover when you've mastered that you could take it one stage further and create queries based on whether or not the animals in question are available to be fostered or adopted.
 
 This won't be an easy exercise but you'l definitely have learnt a lot about querying with Eloquent once you're done.
+
+<br>
+
+## Query efficiency
+
+<br>
