@@ -126,3 +126,57 @@ Try doing some experimentation with the Laravel Debugbar to see how it works and
 Now that we have the debugbar installed lets start to look at improving what we have done so far and how it can help us when we turn our attention to creating a new view.
 
 If you just happen to have a [Laracasts](https://laracasts.com/) subscription then you'll find that [this course](https://laracasts.com/series/eloquent-performance-patterns) will be of immense benefit. It is classed as an 'Advanced' course implying that you'll need to have a good working knowledge of the whole subject of querying databases. If you're a complete novice in that field then this course is probably not for you just yet but on the other hand if you are reasonably proficient in SQL but perhaps not so in Eloquent queries then you'll find this a fascinating course from which you can learn a great deal.
+
+<br>
+
+### The 'index' queries
+
+<br>
+
+Generally these will be the queries that return all of the records from a particular table. In out first example of this we had a `$rescueCentres = RescueCentre::all();` in the index function of the RescueCentreController.
+
+This is effectively the equivalent of ` Select * from rescue_centres` a fact confirmed by the Laravel Debugbar.
+
+<br>
+
+![Debugbar](images/eloquent5.jpg)
+
+<br>
+
+Whilst `::all()` has produced all the records for us it really has as is implied by its name produced 'All' of the records.
+
+<br>
+
+![Record breakdown](images/eloquent6.jpg)
+
+<br>
+
+Whilst there may not be much to each one of the rescue centre records that's only because we defined very few fields for it. In real life there would be many more fields and some of them may well contain confidential information.
+
+In reality we are only interested in displaying the name and location of the rescue centres so let's refactor our eloquent query to reflect that fact.
+
+<br>
+
+```php
+$rescueCentres = RescueCentre::query()
+            ->select(['name','location'])
+            ->get();
+```
+
+<br>
+
+If we save and refresh the view we now see the following:
+
+<br>
+
+![debugbar](images/eloquent7.jpg)
+
+<br>
+
+![Record Breakdown](images/eloquent8.jpg)
+
+<br>
+
+Our optimised query has returned only those fields that we are interested in viewing. Had there been sensitive information in other fields of each record it would have been kept safe from prying eyes. You should also notice, on close examination of the debugbar an improvement in both the view rendering time and the query execution time.
+
+The first lesson to takeaway from this is that , wherever possible, only those records (and fields within said records) that are actually required should be returned. The quesries themselves should run faster and there is less likelihood of exposing yourself to a [Sql Injection](https://www.w3schools.com/sql/sql_injection.asp) attack.
